@@ -1,12 +1,17 @@
 package com.user.service.services.impl;
 
 import java.util.List;
+import java.util.UUID;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import com.user.service.entities.User;
 import com.user.service.exception.ResourceNotFoundException;
 import com.user.service.repositories.UserRepository;
 import com.user.service.services.UserService;
 
+@Service
 public class UserServiceImpl implements UserService{
 
 	@Autowired
@@ -14,6 +19,8 @@ public class UserServiceImpl implements UserService{
 	
 	@Override
 	public User saveUser(User user) {
+		String randomUID = UUID.randomUUID().toString();
+		user.setUserId(randomUID);
 		return userRepository.save(user);
 	}
 
